@@ -49,8 +49,8 @@ public class HideBehavior : MonoBehaviour
 
             if (exitPoint)
             {
-                gameObject.transform.parent.GetComponent<BoxCollider2D>().enabled = false;
-                player.transform.position = gameObject.GetComponentInParent<Transform>().position;
+                gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = true;
+                player.transform.position = gameObject.transform.parent.transform.position;
             }
         }
         else
@@ -62,7 +62,7 @@ public class HideBehavior : MonoBehaviour
             if (exitPoint)
             {
                 player.transform.position = exitPoint.transform.position;
-                gameObject.transform.parent.GetComponent<BoxCollider2D>().enabled = true;
+                gameObject.transform.parent.GetComponent<BoxCollider2D>().isTrigger = false;
             }
         }
 
