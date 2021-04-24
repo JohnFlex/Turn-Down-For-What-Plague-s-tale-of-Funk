@@ -122,6 +122,96 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""UIRotation"",
+            ""id"": ""ca677cd7-f3bd-4f68-b403-2e0ba2cd8c96"",
+            ""actions"": [
+                {
+                    ""name"": ""Joystick Rotation"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""7642981e-7a72-4877-ba7b-894af6254934"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""BackButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d3b1ed4-b6dd-4405-9d6b-e26bc75efe39"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""cf99665e-bf80-4ac4-b808-28e842f5726d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick Rotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""3efabf79-1a3d-4f80-a15b-f7c0f69ab786"",
+                    ""path"": ""<Gamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5330fcab-ab10-4418-b31f-0ce7e16e38af"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""b631d4c4-1485-410f-8ffb-d1305ceb2272"",
+                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""be12e27b-deaa-48bf-bd32-1c8a6d05934d"",
+                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c00cc785-b5a6-43d5-950e-106a89f9bb1a"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BackButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -143,6 +233,10 @@ public class @Controls : IInputActionCollection, IDisposable
         m_Gameplay_Movement = m_Gameplay.FindAction("Movement", throwIfNotFound: true);
         m_Gameplay_Interaction = m_Gameplay.FindAction("Interaction", throwIfNotFound: true);
         m_Gameplay_Run = m_Gameplay.FindAction("Run", throwIfNotFound: true);
+        // UIRotation
+        m_UIRotation = asset.FindActionMap("UIRotation", throwIfNotFound: true);
+        m_UIRotation_JoystickRotation = m_UIRotation.FindAction("Joystick Rotation", throwIfNotFound: true);
+        m_UIRotation_BackButton = m_UIRotation.FindAction("BackButton", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -237,6 +331,47 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public GameplayActions @Gameplay => new GameplayActions(this);
+
+    // UIRotation
+    private readonly InputActionMap m_UIRotation;
+    private IUIRotationActions m_UIRotationActionsCallbackInterface;
+    private readonly InputAction m_UIRotation_JoystickRotation;
+    private readonly InputAction m_UIRotation_BackButton;
+    public struct UIRotationActions
+    {
+        private @Controls m_Wrapper;
+        public UIRotationActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @JoystickRotation => m_Wrapper.m_UIRotation_JoystickRotation;
+        public InputAction @BackButton => m_Wrapper.m_UIRotation_BackButton;
+        public InputActionMap Get() { return m_Wrapper.m_UIRotation; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(UIRotationActions set) { return set.Get(); }
+        public void SetCallbacks(IUIRotationActions instance)
+        {
+            if (m_Wrapper.m_UIRotationActionsCallbackInterface != null)
+            {
+                @JoystickRotation.started -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnJoystickRotation;
+                @JoystickRotation.performed -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnJoystickRotation;
+                @JoystickRotation.canceled -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnJoystickRotation;
+                @BackButton.started -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnBackButton;
+                @BackButton.performed -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnBackButton;
+                @BackButton.canceled -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnBackButton;
+            }
+            m_Wrapper.m_UIRotationActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @JoystickRotation.started += instance.OnJoystickRotation;
+                @JoystickRotation.performed += instance.OnJoystickRotation;
+                @JoystickRotation.canceled += instance.OnJoystickRotation;
+                @BackButton.started += instance.OnBackButton;
+                @BackButton.performed += instance.OnBackButton;
+                @BackButton.canceled += instance.OnBackButton;
+            }
+        }
+    }
+    public UIRotationActions @UIRotation => new UIRotationActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -251,5 +386,10 @@ public class @Controls : IInputActionCollection, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnRun(InputAction.CallbackContext context);
+    }
+    public interface IUIRotationActions
+    {
+        void OnJoystickRotation(InputAction.CallbackContext context);
+        void OnBackButton(InputAction.CallbackContext context);
     }
 }
