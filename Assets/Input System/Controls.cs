@@ -148,9 +148,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 {
                     ""name"": ""2D Vector"",
                     ""id"": ""cf99665e-bf80-4ac4-b808-28e842f5726d"",
-                    ""path"": ""2DVector"",
+                    ""path"": ""2DVector(mode=1)"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone(min=0.2,max=0.8)"",
                     ""groups"": """",
                     ""action"": ""Joystick Rotation"",
                     ""isComposite"": true,
