@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6178192696619193078}
   - component: {fileID: 6178192696619193076}
   - component: {fileID: 6178192696619193077}
+  - component: {fileID: 1593691560302986108}
   m_Layer: 5
   m_Name: SimpleRotationButton
   m_TagString: Untagged
@@ -145,6 +146,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01d2623ebaa84d64b8c445e0b046b4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isVolume: 0
+  selected: {fileID: 11400000, guid: b6bbbb3fbe1795a45ac99532fe79b21b, type: 2}
+  rotate: {fileID: 11400000, guid: 89abc019cacc3884e844473833472187, type: 2}
   rotationSpeed: 20
   damping: 10
   rotationValue: 50
@@ -152,3 +156,23 @@ MonoBehaviour:
   eventSystem: {fileID: 0}
   selectedColor: {r: 1, g: 1, b: 0, a: 0}
   uiOutlineMaterial: {fileID: 2100000, guid: e52ea88bb618ce046bf76a0418ffb99d, type: 2}
+--- !u!114 &1593691560302986108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6178192696619193072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac93c580297bca4984c9123b8e434e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstElementImage: {fileID: 0}
+  secondElementImage: {fileID: 0}
+  thirdElementImage: {fileID: 0}
+  firstElementText: {fileID: 0}
+  secondElementText: {fileID: 0}
+  thirdElementText: {fileID: 0}
+  additionalText: {fileID: 0}
+  toDisplayScriptableObject: {fileID: 11400000, guid: 3412219eb34ec2e45a917f72a7872376, type: 2}

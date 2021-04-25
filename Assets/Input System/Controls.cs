@@ -212,6 +212,33 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BackMiniGame"",
+            ""id"": ""9912c3e9-74e3-4f81-ba83-97feab8eb107"",
+            ""actions"": [
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""11d156c3-b582-4c90-acc2-bb0f5271b1b4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0dd55493-cea8-4ffc-9983-bcbccca1a20c"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -237,6 +264,9 @@ public class @Controls : IInputActionCollection, IDisposable
         m_UIRotation = asset.FindActionMap("UIRotation", throwIfNotFound: true);
         m_UIRotation_JoystickRotation = m_UIRotation.FindAction("Joystick Rotation", throwIfNotFound: true);
         m_UIRotation_BackButton = m_UIRotation.FindAction("BackButton", throwIfNotFound: true);
+        // BackMiniGame
+        m_BackMiniGame = asset.FindActionMap("BackMiniGame", throwIfNotFound: true);
+        m_BackMiniGame_Back = m_BackMiniGame.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -372,6 +402,39 @@ public class @Controls : IInputActionCollection, IDisposable
         }
     }
     public UIRotationActions @UIRotation => new UIRotationActions(this);
+
+    // BackMiniGame
+    private readonly InputActionMap m_BackMiniGame;
+    private IBackMiniGameActions m_BackMiniGameActionsCallbackInterface;
+    private readonly InputAction m_BackMiniGame_Back;
+    public struct BackMiniGameActions
+    {
+        private @Controls m_Wrapper;
+        public BackMiniGameActions(@Controls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Back => m_Wrapper.m_BackMiniGame_Back;
+        public InputActionMap Get() { return m_Wrapper.m_BackMiniGame; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BackMiniGameActions set) { return set.Get(); }
+        public void SetCallbacks(IBackMiniGameActions instance)
+        {
+            if (m_Wrapper.m_BackMiniGameActionsCallbackInterface != null)
+            {
+                @Back.started -= m_Wrapper.m_BackMiniGameActionsCallbackInterface.OnBack;
+                @Back.performed -= m_Wrapper.m_BackMiniGameActionsCallbackInterface.OnBack;
+                @Back.canceled -= m_Wrapper.m_BackMiniGameActionsCallbackInterface.OnBack;
+            }
+            m_Wrapper.m_BackMiniGameActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Back.started += instance.OnBack;
+                @Back.performed += instance.OnBack;
+                @Back.canceled += instance.OnBack;
+            }
+        }
+    }
+    public BackMiniGameActions @BackMiniGame => new BackMiniGameActions(this);
     private int m_GamepadSchemeIndex = -1;
     public InputControlScheme GamepadScheme
     {
@@ -391,5 +454,9 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnJoystickRotation(InputAction.CallbackContext context);
         void OnBackButton(InputAction.CallbackContext context);
+    }
+    public interface IBackMiniGameActions
+    {
+        void OnBack(InputAction.CallbackContext context);
     }
 }

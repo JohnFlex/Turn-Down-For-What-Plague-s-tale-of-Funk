@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 35fb0a09b9ac403478a37bb36b23261d, type: 3}
-  m_Name: SimpleRadioSwitchToolTip
+  m_Name: RotationSelected
   m_EditorClassIdentifier: 
   toolTipImage:
   - {fileID: 479766708322847376, guid: eef2de1ac8547384ea39ed11f42dcedf, type: 3}
@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 8754588075835461215, guid: eef2de1ac8547384ea39ed11f42dcedf, type: 3}
   toolTipText:
   - Navigate
-  - Switch
+  - Start Rotation
   - Exit

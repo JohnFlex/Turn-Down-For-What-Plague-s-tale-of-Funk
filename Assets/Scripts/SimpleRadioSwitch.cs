@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+
+[RequireComponent(typeof(SetToolTip))]
 public class SimpleRadioSwitch : MonoBehaviour, IDeselectHandler, ISelectHandler
 {
     public Image upButton;
@@ -36,8 +38,6 @@ public class SimpleRadioSwitch : MonoBehaviour, IDeselectHandler, ISelectHandler
         downButton.enabled = !isUp;
         upButton.enabled = isUp;
 
-        
-        //audioSource.PlayOneShot(clicClip);
 
         if (isUp)
         {
@@ -65,6 +65,7 @@ public class SimpleRadioSwitch : MonoBehaviour, IDeselectHandler, ISelectHandler
 
     public void OnSelect(BaseEventData eventData)
     {
+        GetComponent<SetToolTip>().SetToolTipElements();
         
         if (isUp)
         {

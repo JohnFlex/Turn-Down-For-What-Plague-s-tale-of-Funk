@@ -6,8 +6,14 @@ using UnityEngine.UI;
 
 
 [RequireComponent(typeof(Image))]
+[RequireComponent(typeof(SetToolTip))]
 public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
+
+    public bool isVolume;
+
+    public ToolTipSO selected;
+    public ToolTipSO rotate;
 
     public float rotationSpeed;
     public float damping;
@@ -28,17 +34,17 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     Rotation actualRotation;
 
-    Vector2 previousRotationStep;
-
     Controls uiInputs;
 
     Image imageComponent;
 
     Vector2 oldJoystickPosition, actualJoystickPosition;
 
+    SetToolTip setToolTip;
+
     private void Awake()
     {
-        previousRotationStep = Vector2.zero;
+        setToolTip = GetComponent<SetToolTip>();
 
         actualRotation = Rotation.None;
 
@@ -58,6 +64,8 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         imageComponent = GetComponent<Image>();
 
         oldJoystickPosition = Vector2.zero;
+
+        setToolTip = GetComponent<SetToolTip>();
     }
 
 
@@ -70,6 +78,11 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         defaultColor = imageComponent.material.GetColor("_OutlineColor");
 
         imageComponent.material.SetColor("_OutlineColor", selectedColor);
+
+        setToolTip.SetToolTipSO(rotate);
+        setToolTip.SetToolTipElements();
+
+        MiniGameManager.MiniGameManagerInstance.enabled = false;
     }
 
 
@@ -82,13 +95,11 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
             case Rotation.Left:
                 desiredRotation -= rotationSpeed;
                 rotationValue += rotationValueStep;
-                Debug.Log("Turning Left");
                 break;
 
             case Rotation.Right:
                 desiredRotation += rotationSpeed;
                 rotationValue -= rotationValueStep;
-                Debug.Log("Turning Right");
                 break;
             default:
                 break;
@@ -96,6 +107,14 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
         var desiredRotQ = Quaternion.Euler(0, 0, desiredRotation);
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotQ, Time.deltaTime * damping);
+
+        if (isVolume)
+        {
+            if (rotationValue <= 5)
+            {
+                MiniGameManager.MiniGameManagerInstance.WinMiniGame();
+            }
+        }
     }
 
 
@@ -111,6 +130,11 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         imageComponent.material.SetColor("_OutlineColor", defaultColor);
 
         eventSystem.GetComponent<EventSystem>().SetSelectedGameObject(this.gameObject);
+
+        setToolTip.SetToolTipSO(selected);
+        setToolTip.SetToolTipElements();
+
+        MiniGameManager.MiniGameManagerInstance.enabled = true;
     }
 
 
@@ -157,6 +181,10 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     public void OnSelect(BaseEventData eventData)
     {
         imageComponent.material = new Material(uiOutlineMaterial);
+
+        setToolTip.SetToolTipSO(selected);
+        setToolTip.SetToolTipElements();
+
     }
 
     public void OnDeselect(BaseEventData eventData)

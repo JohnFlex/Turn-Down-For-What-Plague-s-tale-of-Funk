@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 606772649679230824}
   - component: {fileID: 606772649679230836}
   - component: {fileID: 606772649679230827}
+  - component: {fileID: 8088650622158158149}
   m_Layer: 5
   m_Name: SimpleRadioSwitch
   m_TagString: Untagged
@@ -163,6 +164,26 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8088650622158158149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 606772649679230830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ac93c580297bca4984c9123b8e434e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstElementImage: {fileID: 0}
+  secondElementImage: {fileID: 0}
+  thirdElementImage: {fileID: 0}
+  firstElementText: {fileID: 0}
+  secondElementText: {fileID: 0}
+  thirdElementText: {fileID: 0}
+  additionalText: {fileID: 0}
+  toDisplayScriptableObject: {fileID: 11400000, guid: 3412219eb34ec2e45a917f72a7872376, type: 2}
 --- !u!1 &606772650311479759
 GameObject:
   m_ObjectHideFlags: 0

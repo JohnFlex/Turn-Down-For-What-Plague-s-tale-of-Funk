@@ -199,6 +199,33 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "BackMiniGame",
+            "id": "9912c3e9-74e3-4f81-ba83-97feab8eb107",
+            "actions": [
+                {
+                    "name": "Back",
+                    "type": "Button",
+                    "id": "11d156c3-b582-4c90-acc2-bb0f5271b1b4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0dd55493-cea8-4ffc-9983-bcbccca1a20c",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Back",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
