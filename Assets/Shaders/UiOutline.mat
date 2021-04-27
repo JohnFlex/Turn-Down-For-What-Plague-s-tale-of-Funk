@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UiOutline
+  m_Shader: {fileID: -6465566751694194690, guid: 65ad9cb66b384a548aa633cbef0a7d7b, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - Texture2D_0ad3ff9ed26240c29b2023d12ede78d5:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_3e4d0a25f13342cd9aebc340b9419ee5_Out_0:
+        m_Texture: {fileID: 2800000, guid: 41d233aad013b1942833766983b8be99, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Texture2DAsset_ac3073a0774f4cfb9bec5b1d04a83484_Out_0:
+        m_Texture: {fileID: 2800000, guid: 41d233aad013b1942833766983b8be99, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_b0b2f4ee7e074322a1465f0b00accd19: 5
+    - Vector1_c203a979a0314b188dfa8f4f098e83e5: 100
+    - _OutlineThickness: 50
+    m_Colors:
+    - Color_55a7cfcf3ecb4170a61e85a6517c103d: {r: 1, g: 0, b: 0.8605418, a: 0}
+    - _OutlineColor: {r: 1, g: 0, b: 1, a: 0}
+  m_BuildTextureStacks: []
