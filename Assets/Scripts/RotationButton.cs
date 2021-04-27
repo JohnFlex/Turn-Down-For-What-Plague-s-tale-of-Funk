@@ -9,7 +9,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(SetToolTip))]
 public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-
+    public AudioSource radioSource;
     public bool isVolume;
 
     public ToolTipSO selected;
@@ -41,6 +41,8 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     Vector2 oldJoystickPosition, actualJoystickPosition;
 
     SetToolTip setToolTip;
+
+    
 
     private void Awake()
     {
@@ -94,12 +96,23 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         {
             case Rotation.Left:
                 desiredRotation -= rotationSpeed;
+                
                 rotationValue += rotationValueStep;
+
+                if (isVolume && rotationValue > 100)
+                {
+                    rotationValue = 100;
+                }
                 break;
 
             case Rotation.Right:
                 desiredRotation += rotationSpeed;
                 rotationValue -= rotationValueStep;
+
+                if (isVolume && rotationValue < 0)
+                {
+                    rotationValue = 0;
+                }
                 break;
             default:
                 break;
@@ -110,6 +123,7 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
         if (isVolume)
         {
+            radioSource.volume = rotationValue / 100;
             if (rotationValue <= 5)
             {
                 MiniGameManager.MiniGameManagerInstance.WinMiniGame();

@@ -1,26 +1,16 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
 guid: 39d112aea5ad22f4f8cf7cfcb4134610
-=======
-guid: eef2de1ac8547384ea39ed11f42dcedf
->>>>>>> UIMiniGames
 TextureImporter:
   internalIDToNameTable:
   - first:
       213: 479766708322847376
     second: SwitchControllerOutline_0
-<<<<<<< HEAD
-=======
   - first:
       213: 1461015799763988192
     second: SwitchControllerOutline_1
   - first:
       213: 8242704938164592935
     second: SwitchControllerOutline_2
-  - first:
-      213: 8754588075835461215
-    second: SwitchControllerOutline_3
->>>>>>> UIMiniGames
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -56,7 +46,7 @@ TextureImporter:
     mipBias: -100
     wrapU: 1
     wrapV: 1
-    wrapW: 1
+    wrapW: -1
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
@@ -80,14 +70,14 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 0
+  applyGammaDecoding: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -99,7 +89,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -111,7 +101,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -123,7 +113,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -135,7 +125,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -149,12 +139,10 @@ TextureImporter:
       name: SwitchControllerOutline_0
       rect:
         serializedVersion: 2
-<<<<<<< HEAD
-=======
-        x: 2
-        y: 68
-        width: 18
-        height: 18
+        x: 4
+        y: 26
+        width: 14
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -173,7 +161,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2
-        y: 90
+        y: 68
         width: 18
         height: 18
       alignment: 0
@@ -193,15 +181,12 @@ TextureImporter:
       name: SwitchControllerOutline_2
       rect:
         serializedVersion: 2
->>>>>>> UIMiniGames
-        x: 4
+        x: 26
         y: 26
         width: 14
         height: 15
       alignment: 0
-<<<<<<< HEAD
-=======
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -209,33 +194,6 @@ TextureImporter:
       bones: []
       spriteID: 721a8a33878f36270800000000000000
       internalID: 8242704938164592935
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: SwitchControllerOutline_3
-      rect:
-        serializedVersion: 2
-        x: 26
-        y: 26
-        width: 14
-        height: 15
-      alignment: 0
->>>>>>> UIMiniGames
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-<<<<<<< HEAD
-      spriteID: 09a44a0874978a600800000000000000
-      internalID: 479766708322847376
-=======
-      spriteID: f5e0b0f987b8e7970800000000000000
-      internalID: 8754588075835461215
->>>>>>> UIMiniGames
       vertices: []
       indices: 
       edges: []

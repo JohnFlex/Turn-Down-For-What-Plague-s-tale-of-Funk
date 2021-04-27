@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: SimpleRadioSwitchToolTip
   m_EditorClassIdentifier: 
   toolTipImage:
-  - {fileID: 479766708322847376, guid: eef2de1ac8547384ea39ed11f42dcedf, type: 3}
-  - {fileID: 8242704938164592935, guid: eef2de1ac8547384ea39ed11f42dcedf, type: 3}
-  - {fileID: 8754588075835461215, guid: eef2de1ac8547384ea39ed11f42dcedf, type: 3}
+  - {fileID: 1461015799763988192, guid: 39d112aea5ad22f4f8cf7cfcb4134610, type: 3}
+  - {fileID: 479766708322847376, guid: 39d112aea5ad22f4f8cf7cfcb4134610, type: 3}
+  - {fileID: 8242704938164592935, guid: 39d112aea5ad22f4f8cf7cfcb4134610, type: 3}
   toolTipText:
   - Navigate
   - Switch
