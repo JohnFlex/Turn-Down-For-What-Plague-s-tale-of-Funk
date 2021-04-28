@@ -15,7 +15,7 @@ public static class GameOverScript
 
         FadeOut.FADE_OUT_ELEMENT.FadeToBlack(1f);
 
-        player.transform.position = GameObject.FindGameObjectWithTag("SpawnPoint").transform.position;
+        player.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
 
         FadeOut.FADE_OUT_ELEMENT.FadeFromBlack(2f);
 
