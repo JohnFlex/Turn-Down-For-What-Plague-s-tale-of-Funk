@@ -32,8 +32,10 @@ public class FadeOut : MonoBehaviour
         fadeElement.CrossFadeAlpha(0.0f, fadeTime, true);
     }
 
-    private void Start()
+    private void OnEnable()
     {
         FadeFromBlack(1f);
     }
+
+    
 }
