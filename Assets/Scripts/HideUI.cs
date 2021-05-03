@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(HideBehavior))]
+
 public class HideUI : MonoBehaviour
 {
     [SerializeField]
@@ -28,5 +28,10 @@ public class HideUI : MonoBehaviour
     public void SetUiText()
     {
         textMesh.text = HideBehavior.HIDE_STATUS ? "Exit" : "Hide";
+    }
+
+    public void SetUiText(string text)
+    {
+        textMesh.text = text;
     }
 }

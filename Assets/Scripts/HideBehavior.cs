@@ -12,11 +12,15 @@ public class HideBehavior : MonoBehaviour
    
     bool isPlayerInside = false;
 
+    HideUI hideUI;
+
     public static bool HIDE_STATUS;
 
     private void Awake()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         PlayerMovement.onTryInteract += TriggerHide;
+        hideUI = GetComponent<HideUI>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,6 +29,7 @@ public class HideBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerInside = true;
+            hideUI.SetUiText();
         }
     }
 

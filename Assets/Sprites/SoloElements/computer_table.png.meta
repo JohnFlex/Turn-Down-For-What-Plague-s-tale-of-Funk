@@ -8,6 +8,9 @@ TextureImporter:
   - first:
       213: 4781209773537739289
     second: computer_table_1
+  - first:
+      213: 2269064314578473033
+    second: computer_table_2
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -141,7 +144,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,7 +165,7 @@ TextureImporter:
         width: 48
         height: 48
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -170,6 +173,27 @@ TextureImporter:
       bones: []
       spriteID: 912c75405f44a5240800000000000000
       internalID: 4781209773537739289
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: computer_table_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 96
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94017fad8f55d7f10800000000000000
+      internalID: 2269064314578473033
       vertices: []
       indices: 
       edges: []
