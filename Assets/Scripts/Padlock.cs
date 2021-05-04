@@ -9,10 +9,11 @@ using UnityEngine.EventSystems;
 [RequireComponent(typeof(SetToolTip))]
 public class Padlock : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
-    static bool ALREADY_BROKE_KEY_ONCE;
+    static bool ALREADY_BROKE_KEY_ONCE = false;
+    public GameObject newKey, brokenKeyToolTip, goodKeyToolTip;
 
-    public ToolTipSO selected;
-    public ToolTipSO enteringKey;
+    public ToolTipSO selected, enteringKey, noKey;
+
 
     public GameObject eventSystem, visualPadlock;
 
@@ -71,6 +72,11 @@ public class Padlock : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void StartKeyEntering()
     {
+        if (!PickupCassette.HAS_KEY)
+        {
+            return;
+        }
+
         uiInputs.UIRotation.Enable();
         eventSystem.GetComponent<EventSystem>().enabled = false;
         eventSystem.GetComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>().enabled = false;
@@ -100,10 +106,26 @@ public class Padlock : MonoBehaviour, ISelectHandler, IDeselectHandler
 
         if (statusSequenceIndex == statusSequence.Length-1)
         {
-            volumeButton.interactable = true;
+
+            if (!ALREADY_BROKE_KEY_ONCE)
+            {
+                ALREADY_BROKE_KEY_ONCE = true;
+                PickupCassette.HAS_KEY = false;
+                newKey.SetActive(true);
+                brokenKeyToolTip.SetActive(true);
+                goodKeyToolTip.SetActive(false);
+                statusSequenceIndex = 0;
+                ExitKeyEntering();
+                
+            }
+            else
+            {
+                volumeButton.interactable = true;
             
-            ExitKeyEntering();
-            Destroy(this.gameObject, 0.2f);
+                ExitKeyEntering();
+                Destroy(this.gameObject, 0.2f);
+            }
+            
         }
         
     }
@@ -156,8 +178,15 @@ public class Padlock : MonoBehaviour, ISelectHandler, IDeselectHandler
     public void OnSelect(BaseEventData eventData)
     {
         imageComponent.material = new Material(uiOutlineMaterial);
-
+        
         setToolTip.SetToolTipSO(selected);
+        if (!PickupCassette.HAS_KEY)
+        {
+            setToolTip.SetToolTipSO(noKey);
+
+        }
+
+        
         setToolTip.SetToolTipElements();
 
     }

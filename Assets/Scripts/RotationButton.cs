@@ -13,7 +13,7 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
     public bool isVolume;
 
     public ToolTipSO selected;
-    public ToolTipSO rotate;
+    public ToolTipSO rotate, noScrewDriver;
 
     public float rotationSpeed;
     public float damping;
@@ -73,6 +73,12 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
 
     public void StartRotation()
     {
+
+        if (TryGetComponent<ScrewManager>(out ScrewManager screwManager)  && !PickupCassette.HAS_SCREWDRIVER)
+        {
+            return;
+        }
+
         uiInputs.UIRotation.Enable();
         eventSystem.GetComponent<EventSystem>().enabled = false;
         eventSystem.GetComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>().enabled = false;
@@ -197,6 +203,13 @@ public class RotationButton : MonoBehaviour, ISelectHandler, IDeselectHandler
         imageComponent.material = new Material(uiOutlineMaterial);
 
         setToolTip.SetToolTipSO(selected);
+        
+
+        if (TryGetComponent<ScrewManager>(out ScrewManager screwManager) && !PickupCassette.HAS_SCREWDRIVER)
+        {
+            setToolTip.SetToolTipSO(noScrewDriver);
+        }
+        
         setToolTip.SetToolTipElements();
 
     }

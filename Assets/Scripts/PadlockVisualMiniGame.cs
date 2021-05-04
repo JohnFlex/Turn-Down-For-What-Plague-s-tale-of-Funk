@@ -50,9 +50,5 @@ public class PadlockVisualMiniGame : MonoBehaviour
 
         keysMovementParent.anchoredPosition = new Vector2(Mathf.Lerp(originalXPosition, endPoint.anchoredPosition.x, (1f / padlock.statusSequence.Length) * padlock.statusSequenceIndex), 0f);
 
-        Debug.Log("Padlock interpolate : "+ (1f / padlock.statusSequence.Length) * padlock.statusSequenceIndex);
-        Debug.Log(1f / (padlock.statusSequence.Length - 1));
-        Debug.Log(padlock.statusSequenceIndex);
-        Debug.Log(new Vector2(Mathf.Lerp(originalXPosition, endPoint.anchoredPosition.x, (1 / padlock.statusSequence.Length - 1) * padlock.statusSequenceIndex), 0f));
-    }
+       }
 }
