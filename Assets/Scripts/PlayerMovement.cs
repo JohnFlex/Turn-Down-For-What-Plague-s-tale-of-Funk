@@ -21,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
     bool isRunning;
 
     public static event Action onTryInteract;
+    public Animator animator;
+
+   
 
     private void Awake()
     {
@@ -35,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
         inputs.Gameplay.Run.canceled += _ => isRunning = false;
 
         inputs.Gameplay.Interaction.performed += _ => onTryInteract?.Invoke();
+
+
+        
         
     }
 
@@ -51,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 move = inputVector * speed * tempMultiplicator * Time.fixedDeltaTime;
             rb.MovePosition(transform.position + move);
+            animator.SetFloat("horizontal", move.x);
+            animator.SetFloat("Vertical", move.y);
+            animator.SetFloat("speed", move.magnitude);
         }
     }
 
