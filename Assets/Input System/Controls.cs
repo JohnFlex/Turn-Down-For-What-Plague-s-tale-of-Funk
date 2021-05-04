@@ -142,6 +142,14 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Push"",
+                    ""type"": ""Button"",
+                    ""id"": ""7dea5589-ee2b-45ba-a0f3-da2c6fa94df5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -210,6 +218,17 @@ public class @Controls : IInputActionCollection, IDisposable
                     ""action"": ""BackButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""558ee200-ba82-45ad-b82d-640189cdcf7a"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Push"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -264,6 +283,7 @@ public class @Controls : IInputActionCollection, IDisposable
         m_UIRotation = asset.FindActionMap("UIRotation", throwIfNotFound: true);
         m_UIRotation_JoystickRotation = m_UIRotation.FindAction("Joystick Rotation", throwIfNotFound: true);
         m_UIRotation_BackButton = m_UIRotation.FindAction("BackButton", throwIfNotFound: true);
+        m_UIRotation_Push = m_UIRotation.FindAction("Push", throwIfNotFound: true);
         // BackMiniGame
         m_BackMiniGame = asset.FindActionMap("BackMiniGame", throwIfNotFound: true);
         m_BackMiniGame_Back = m_BackMiniGame.FindAction("Back", throwIfNotFound: true);
@@ -367,12 +387,14 @@ public class @Controls : IInputActionCollection, IDisposable
     private IUIRotationActions m_UIRotationActionsCallbackInterface;
     private readonly InputAction m_UIRotation_JoystickRotation;
     private readonly InputAction m_UIRotation_BackButton;
+    private readonly InputAction m_UIRotation_Push;
     public struct UIRotationActions
     {
         private @Controls m_Wrapper;
         public UIRotationActions(@Controls wrapper) { m_Wrapper = wrapper; }
         public InputAction @JoystickRotation => m_Wrapper.m_UIRotation_JoystickRotation;
         public InputAction @BackButton => m_Wrapper.m_UIRotation_BackButton;
+        public InputAction @Push => m_Wrapper.m_UIRotation_Push;
         public InputActionMap Get() { return m_Wrapper.m_UIRotation; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,6 +410,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @BackButton.started -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnBackButton;
                 @BackButton.performed -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnBackButton;
                 @BackButton.canceled -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnBackButton;
+                @Push.started -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnPush;
+                @Push.performed -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnPush;
+                @Push.canceled -= m_Wrapper.m_UIRotationActionsCallbackInterface.OnPush;
             }
             m_Wrapper.m_UIRotationActionsCallbackInterface = instance;
             if (instance != null)
@@ -398,6 +423,9 @@ public class @Controls : IInputActionCollection, IDisposable
                 @BackButton.started += instance.OnBackButton;
                 @BackButton.performed += instance.OnBackButton;
                 @BackButton.canceled += instance.OnBackButton;
+                @Push.started += instance.OnPush;
+                @Push.performed += instance.OnPush;
+                @Push.canceled += instance.OnPush;
             }
         }
     }
@@ -454,6 +482,7 @@ public class @Controls : IInputActionCollection, IDisposable
     {
         void OnJoystickRotation(InputAction.CallbackContext context);
         void OnBackButton(InputAction.CallbackContext context);
+        void OnPush(InputAction.CallbackContext context);
     }
     public interface IBackMiniGameActions
     {
