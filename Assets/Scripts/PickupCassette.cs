@@ -6,32 +6,39 @@ using UnityEngine;
 [RequireComponent(typeof(HideUI))]
 public class PickupCassette : MonoBehaviour
 {
+    public static bool HAS_KEY = false;
+    public static bool HAS_SCREWDRIVER = false;
+    public enum Pickable { Cassette, ScrewDriver, Key};
+    public Pickable pickable;
 
-    bool isInside;
-    public GameObject foundCassetteToolTip;
+    bool isPlayerInside, isObjectInside = true;
+    public GameObject foundPickableToolTip;
     [SerializeField]
-    AudioClip clipWhenPicked;
+    AudioClip clipWhenPicked, dialogueClipWhenPicked;
+    
+
 
 
     private void Awake()
     {
-        PlayerMovement.onTryInteract += TakeCassette;
-        foundCassetteToolTip.SetActive(false);
+        PlayerMovement.onTryInteract += TakePickable;
+        foundPickableToolTip.SetActive(false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"));
         {
-            isInside = true;
-            if (!RadioCassette.PICKED_UP_CASSETTE_IN_THIS_LEVEL)
+            isPlayerInside = true;
+            string stringToDisplay = "Pick a " + pickable.ToString();
+
+            if (!isObjectInside)
             {
-                GetComponent<HideUI>().SetUiText("Pick a cassette");
+                stringToDisplay = "It's empty...";
             }
-            else
-            {
-                GetComponent<HideUI>().SetUiText("The trash is empty...");
-            }
+            
+            GetComponent<HideUI>().SetUiText(stringToDisplay);
+            
 
         }   
     }
@@ -40,19 +47,34 @@ public class PickupCassette : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")) ;
         {
-            isInside = false;
+            isPlayerInside = false;
         }
     }
 
-    void TakeCassette()
+    void TakePickable()
     {
         
-        if (isInside)
+        if (isPlayerInside && isObjectInside)
         {
-            RadioCassette.PICKED_UP_CASSETTE_IN_THIS_LEVEL = true;
-            foundCassetteToolTip.SetActive(true);
-            PlayerMovement.onTryInteract -= TakeCassette;
+            switch (pickable)
+            {
+                case Pickable.Cassette:
+                    RadioCassette.PICKED_UP_CASSETTE_IN_THIS_LEVEL = true;
+                    break;
+                case Pickable.ScrewDriver:
+                    HAS_SCREWDRIVER = true;
+                    break;
+                case Pickable.Key:
+                    HAS_KEY = true;
+                    break;
+                default:
+                    break;
+            }
+            
+            foundPickableToolTip.SetActive(true);
+            PlayerMovement.onTryInteract -= TakePickable;
             GetComponent<AudioSource>().PlayOneShot(clipWhenPicked);
+            GetComponent<AudioSource>().PlayOneShot(dialogueClipWhenPicked);
             StartCoroutine(FlashOnPickup());
 
         }
@@ -60,14 +82,14 @@ public class PickupCassette : MonoBehaviour
 
     private void OnDestroy()
     {
-        PlayerMovement.onTryInteract -= TakeCassette;
+        PlayerMovement.onTryInteract -= TakePickable;
     }
 
     IEnumerator FlashOnPickup()
     {
         for (int i = 0; i < 6; i++)
         {
-            foundCassetteToolTip.SetActive(!foundCassetteToolTip.activeSelf);
+            foundPickableToolTip.SetActive(!foundPickableToolTip.activeSelf);
             yield return new WaitForSeconds(0.5f);
         }
     }
