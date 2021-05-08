@@ -27,16 +27,15 @@ public class MiniGameManager : MonoBehaviour
 
     PlayerMovement playerMovement;
 
-    GameObject[] ennemies;
+    public GameObject[] ennemies;
 
-    private void Awake()
+    private void Start()
     {
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
 
-        if (!_miniGameManager)
-        {
-            _miniGameManager = this;
-        }
+        
+        _miniGameManager = this;
+        
 
         controls = new Controls();
 
@@ -52,8 +51,16 @@ public class MiniGameManager : MonoBehaviour
         {
             
             playerMovement.enabled = false;
-            
 
+            if (ennemies.Length != 0)
+            {
+                foreach (GameObject item in ennemies)
+                {
+                    item.SetActive(false);
+                }
+            }
+
+            GetComponent<PlayClipAndShowDialog>().PlayFromExternal();
 
             Invoke("InvokedSelection", 0.05f);
 
@@ -70,14 +77,24 @@ public class MiniGameManager : MonoBehaviour
         controls.BackMiniGame.Disable();
         playerMovement.enabled = true;
 
+        if (ennemies.Length != 0)
+        {
+            foreach (GameObject item in ennemies)
+            {
+                item.SetActive(true);
+            }
+        }
+
     }
 
     
 
     public void WinMiniGame()
     {
-        Debug.Log("Win !");
+        PlayerMovement.onTryInteract -= OpenMiniGame;
         CloseMiniGame();
+        LevelManager.WinLevel();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -101,7 +118,7 @@ public class MiniGameManager : MonoBehaviour
 
     void InvokedSelection()
     {
-        //eventSystem.SetSelectedGameObject(firstItem);
+        eventSystem.SetSelectedGameObject(firstItem);
         canvasMiniGame.SetActive(true);
         controls.BackMiniGame.Enable();
     }

@@ -20,6 +20,9 @@ public class RadioCassette : MonoBehaviour, ISelectHandler, IDeselectHandler
     public ToolTipSO noCassetteToolTip, changeCassetteToolTip, alreadyChangedToolTip;
     public Color noCassetteColor, canChangeColor, alreadyChangedColor;
 
+    public AudioSource radioSource;
+    public AudioClip clipOnChange;
+
 
     // Start is called before the first frame update
     void Start()
@@ -61,6 +64,9 @@ public class RadioCassette : MonoBehaviour, ISelectHandler, IDeselectHandler
             localSetToolTip.SetToolTipSO(alreadyChangedToolTip);
             localSetToolTip.SetToolTipElements();
             localImage.material.SetColor("_OutlineColor", alreadyChangedColor);
+
+            radioSource.clip = clipOnChange;
+            radioSource.Play();
             
         }
         

@@ -4,39 +4,40 @@ using UnityEngine;
 
 public class PlayClipAndShowDialog : MonoBehaviour
 {
-
+    public bool playOnEnter;
     public AudioClip clip;
+    [TextArea(3,10)]
     public string dialogString;
 
-    static AudioSource globalSource;
+    public AudioSource globalSource;
     public TMPro.TextMeshProUGUI globalTextShow;
 
     // Start is called before the first frame update
 
     void Start()
     {
-        if (!globalSource)
+        if (globalSource == null)
         {
             globalSource = new AudioSource();
         }
+        Debug.Log(globalSource);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        globalSource.PlayOneShot(clip);
-        StartCoroutine(ShowDialog(dialogString));
+        if (playOnEnter)
+        {
+            globalSource.PlayOneShot(clip);
+            globalTextShow.text = dialogString;
+            StartCoroutine(DelayDesactivation());
+            gameObject.SetActive(false);
+        }
     }
 
 
-    IEnumerator ShowDialog(string dialogLine)
+    IEnumerator DelayDesactivation()
     {
-        globalTextShow.gameObject.SetActive(true);
-        globalTextShow.text = "";
-        foreach (char letter in dialogLine.ToCharArray())
-        {
-            globalTextShow.text += letter;
-            yield return null;
-        }
+        
 
         do
         {
@@ -45,6 +46,14 @@ public class PlayClipAndShowDialog : MonoBehaviour
 
         globalTextShow.gameObject.SetActive(false);
 
+        
+    }
+
+    public void PlayFromExternal()
+    {
+        globalSource.PlayOneShot(clip);
+        globalTextShow.text = dialogString;
+        StartCoroutine(DelayDesactivation());
     }
 
 }

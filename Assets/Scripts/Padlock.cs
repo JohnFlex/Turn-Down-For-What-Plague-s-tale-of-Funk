@@ -42,6 +42,9 @@ public class Padlock : MonoBehaviour, ISelectHandler, IDeselectHandler
     [SerializeField]
     Button volumeButton;
 
+    public PlayClipAndShowDialog playElement;
+    public AudioClip brokeKey;
+
 
 
     private void Awake()
@@ -116,6 +119,8 @@ public class Padlock : MonoBehaviour, ISelectHandler, IDeselectHandler
                 goodKeyToolTip.SetActive(false);
                 statusSequenceIndex = 0;
                 ExitKeyEntering();
+                playElement.clip = brokeKey;
+                playElement.PlayFromExternal();
                 
             }
             else

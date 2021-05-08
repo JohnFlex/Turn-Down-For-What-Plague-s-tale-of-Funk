@@ -19,7 +19,9 @@ public class ScrewManager : MonoBehaviour
     public UnityEngine.EventSystems.EventSystem eventSystem;
 
 
-    public ToolTipSO noScrewdriver, hasScrewdriver;
+    public PlayClipAndShowDialog playElement;
+
+    public AudioClip finishedScrewdriver;
 
 
     // Start is called before the first frame update
@@ -27,6 +29,8 @@ public class ScrewManager : MonoBehaviour
     {
         rotBtnElement = GetComponent<RotationButton>();
         thisButton = GetComponent<Button>();
+
+        
     }
 
     // Update is called once per frame
@@ -48,9 +52,14 @@ public class ScrewManager : MonoBehaviour
                     item.interactable = true;
                 }
                 
-                glassPanel.SetActive(false);
+                
 
                 eventSystem.SetSelectedGameObject(selectedGameobject);
+                
+                eventSystem.firstSelectedGameObject = buttonsToActivateOnPanelDrop[0].gameObject;
+
+                glassPanel.SetActive(false);
+                
             }
         }
     }

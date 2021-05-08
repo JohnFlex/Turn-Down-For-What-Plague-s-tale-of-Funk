@@ -4,6 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(HideUI))]
+[RequireComponent(typeof(PlayClipAndShowDialog))]
 public class PickupCassette : MonoBehaviour
 {
     public static bool HAS_KEY = false;
@@ -14,7 +15,7 @@ public class PickupCassette : MonoBehaviour
     bool isPlayerInside, isObjectInside = true;
     public GameObject foundPickableToolTip;
     [SerializeField]
-    AudioClip clipWhenPicked, dialogueClipWhenPicked;
+    AudioClip clipWhenPicked;
     
 
 
@@ -45,7 +46,7 @@ public class PickupCassette : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) ;
+        if (collision.gameObject.CompareTag("Player"))
         {
             isPlayerInside = false;
         }
@@ -70,11 +71,12 @@ public class PickupCassette : MonoBehaviour
                 default:
                     break;
             }
-            
+
+            isObjectInside = false;
             foundPickableToolTip.SetActive(true);
             PlayerMovement.onTryInteract -= TakePickable;
             GetComponent<AudioSource>().PlayOneShot(clipWhenPicked);
-            GetComponent<AudioSource>().PlayOneShot(dialogueClipWhenPicked);
+            GetComponent<PlayClipAndShowDialog>().PlayFromExternal();
             StartCoroutine(FlashOnPickup());
 
         }

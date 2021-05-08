@@ -17,15 +17,22 @@ public class LevelManager : MonoBehaviour
         }
 
         LEVEL = PlayerPrefs.GetInt("Level");
-        
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
-    void WinLevel()
+    public static void WinLevel()
     {
         LEVEL++;
 
         PlayerPrefs.SetInt("Level", LEVEL);
         PlayerPrefs.Save();
 
+        if (LEVEL == 3)
+        {
+            LEVEL = 0;
+        }
+        SceneManager.LoadScene(LEVEL);
     }
 }

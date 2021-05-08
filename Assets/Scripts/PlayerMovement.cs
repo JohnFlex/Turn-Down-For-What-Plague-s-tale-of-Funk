@@ -23,6 +23,10 @@ public class PlayerMovement : MonoBehaviour
     public static event Action onTryInteract;
     public Animator animator;
 
+    Material spr;
+
+    Color transparent;
+
    
 
     private void Awake()
@@ -40,7 +44,9 @@ public class PlayerMovement : MonoBehaviour
         inputs.Gameplay.Interaction.performed += _ => onTryInteract?.Invoke();
 
 
-        
+        spr = GetComponent<SpriteRenderer>().material;
+
+        transparent = new Color(1f, 1f, 1f, 0.5f);
         
     }
 
@@ -52,6 +58,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        spr.color = HideBehavior.HIDE_STATUS ? transparent : Color.white ;
+
         float tempMultiplicator = isRunning ? runMultiplicator : 1f;
         if (inputVector != Vector2.zero && !HideBehavior.HIDE_STATUS)
         {
@@ -66,5 +74,11 @@ public class PlayerMovement : MonoBehaviour
     private void OnDisable()
     {
         inputs.Gameplay.Disable();
+    }
+
+    private void OnDestroy()
+    {
+        inputs.Gameplay.Interaction.performed -= _ => onTryInteract?.Invoke();
+        Destroy(this);
     }
 }

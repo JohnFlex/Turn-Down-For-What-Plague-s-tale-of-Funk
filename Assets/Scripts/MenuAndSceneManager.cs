@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MenuAndSceneManager : MonoBehaviour
 {
-    public UnityEngine.UI.Button button;
+    public Button continueButton;
     private void Start()
     {
         if (PlayerPrefs.HasKey("Level"))
@@ -19,7 +20,7 @@ public class MenuAndSceneManager : MonoBehaviour
 
         if (LevelManager.LEVEL == 1)
         {
-            button.interactable = false;
+            continueButton.interactable = false;
         }
         
     }
@@ -30,6 +31,7 @@ public class MenuAndSceneManager : MonoBehaviour
         PlayerPrefs.SetString("CassetteLevel", "0000000");
         PlayerPrefs.Save();
         FadeOut.FADE_OUT_ELEMENT.FadeToBlack(2f);
+        LevelManager.LEVEL = 1;
         SceneManager.LoadScene(LevelManager.LEVEL);
     }
 
